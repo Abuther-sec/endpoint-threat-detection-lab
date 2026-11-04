@@ -1,0 +1,27 @@
+# Secrets and credentials
+.env
+.env.*
+*.key
+*.pem
+*secret*
+*password*
+
+# Real data - never publish
+private-data/
+*.evtx
+*.pcap
+*.pcapng
+
+# Generated output
+output/
+*.log
+
+# Python
+pycache/
+*.pyc
+.venv/
+venv/
+
+# OS and editor
+Thumbs.db
+.vscode/
