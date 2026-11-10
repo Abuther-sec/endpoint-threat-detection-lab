@@ -132,3 +132,15 @@ class RuleBehaviorTests(unittest.TestCase):
 
     def test_empty_input_gives_no_findings(self):
         self.assertEqual(d.detect(result_of([])), [])
+
+
+class ConfigAndDescribeTests(unittest.TestCase):
+    def test_multi_user_threshold_below_two_raises(self):
+        with self.assertRaises(ValueError):
+            d.detect(result_of([]), d.DetectionConfig(multi_user_threshold=1))
+
+    def test_describe_gives_one_line_per_finding(self):
+        findings = d.detect(result_of([make_event(1, 0), make_event(2, 1)]))
+        lines = d.describe(findings)
+        self.assertEqual(len(lines), len(findings))
+        self.assertTrue(lines[0].startswith("FAILED_LOGON | count=1 | records=1 |"))

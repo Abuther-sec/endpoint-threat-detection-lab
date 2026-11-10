@@ -1,0 +1,2 @@
+# Development only: measures test coverage. The project itself uses only the standard library.
+coverage==7.17.2

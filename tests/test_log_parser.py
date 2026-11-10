@@ -128,3 +128,35 @@ class ParserBehaviorTests(unittest.TestCase):
         path.write_text("{not json", encoding="utf-8")
         with self.assertRaises(p.LogParserError):
             p.parse_file(path)
+
+
+class ParserEdgeCaseTests(unittest.TestCase):
+    def setUp(self):
+        folder = tempfile.TemporaryDirectory()
+        self.addCleanup(folder.cleanup)
+        self.folder = Path(folder.name)
+
+    def write_json(self, data, name="events.json"):
+        path = self.folder / name
+        path.write_text(json.dumps(data), encoding="utf-8")
+        return path
+
+    def test_single_object_root_is_accepted(self):
+        result = p.parse_file(self.write_json(good()))
+        self.assertEqual(result.total_records, 1)
+        self.assertEqual(len(result.events), 1)
+
+    def test_json_root_of_wrong_type_raises(self):
+        with self.assertRaises(p.LogParserError):
+            p.parse_file(self.write_json(42))
+
+    def test_missing_event_id_is_rejected(self):
+        record = good()
+        del record["EventId"]
+        result = p.parse_file(self.write_json([record]))
+        self.assertEqual(result.rejected[0]["reason"], "missing event_id")
+
+    def test_non_numeric_logon_type_becomes_none(self):
+        result = p.parse_file(self.write_json([good({"LogonType": "interactive"})]))
+        self.assertEqual(len(result.events), 1)
+        self.assertIsNone(result.events[0].logon_type)

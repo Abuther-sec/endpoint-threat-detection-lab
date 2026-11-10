@@ -25,3 +25,5 @@ venv/
 # OS and editor
 Thumbs.db
 .vscode/
+.coverage
+htmlcov/

@@ -164,3 +164,12 @@ class OtherRuleTests(unittest.TestCase):
         lines = s.describe_assessments(found)
         self.assertEqual(len(lines), len(found))
         self.assertTrue(all("(confidence" in line for line in lines))
+
+
+class UnknownRuleTests(unittest.TestCase):
+    def test_unknown_rule_gets_a_safe_default(self):
+        finding = d.Finding(rule_id="SOMETHING_NEW", title="t", description="x",
+                            record_numbers=[1], count=1)
+        found = s.classify_all([finding], result_of([]))
+        self.assertEqual((found[0].severity, found[0].confidence), ("Informational", "Low"))
+        self.assertIn("No severity rule", found[0].reasons[0])
