@@ -41,3 +41,45 @@ Command:
 - Account lockout events (4740) for bob.test.
 - Whether the source is expected (scanner, misconfigured service, test host).
 - Other accounts targeted by the same source in the same period.
+
+## Scenario 2: one source, several accounts (password spray pattern)
+
+Input: sample-logs/scenarios/scenario2_spray.json (8 records).
+
+Command:
+
+    python src/analyze.py sample-logs/scenarios/scenario2_spray.json --origin synthetic --out sample-reports/scenario2
+
+### Facts (from the generated report)
+
+- 8 of 8 records usable, 0 rejected.
+- 9 findings: 1 Medium (confidence High) and 8 Informational (confidence High).
+- The Medium finding is MULTIPLE_USERS_FROM_SOURCE: 4 different users (alice.test,
+  bob.test, carol.test, ghost.test) failed to log on from 203.0.113.45 inside a
+  60 s window, records 1 to 8, 20:00:05 to 20:00:40 UTC.
+- Reasons printed by the tool: 8 failed logons with different user names from one source,
+  and some attempts used user names that do not exist (sub-status 0xC0000064).
+- No REPEATED_FAILED_LOGONS finding: each account failed only twice, below the threshold of 5.
+- Records 4 and 8 (ghost.test) carry sub-status 0xc0000064; the other six carry 0xc000006a.
+
+### Reading (interpretation, not proof)
+
+- Few attempts per account across several accounts fits a password spray: it stays under
+  per-account thresholds, which is why the per-account rule stays silent here while the
+  per-source rule fires. Compare scenario 1.
+- A name that does not exist, tried twice, suggests the list of names was guessed or
+  taken from somewhere else. The log does not show which passwords were tried.
+- Not determined: whether any attempt succeeded, whether the source is internal or
+  external, and whether ghost.test is a typo or part of a name list.
+
+### Limits of this detection
+
+- The rule groups failures inside a 60 s window by default. A slower spray spread over
+  hours would not be grouped by it. That case was not tested here.
+
+### What an analyst would check next
+
+- Successful logons (4624) from 203.0.113.45 for any of the four names, at any time after.
+- Lockout events (4740) for the three existing accounts.
+- Other names tried by the same source before 20:00:05 or after 20:00:40.
+- Whether the source is expected (scanner, test host).

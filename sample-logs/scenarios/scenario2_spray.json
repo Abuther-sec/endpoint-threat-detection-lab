@@ -1,0 +1,10 @@
+[
+{"Timestamp":"2026-03-03T20:00:05+00:00","EventId":4625,"Computer":"LAB-PC01","Provider":"Microsoft-Windows-Security-Auditing","LogName":"Security","User":"alice.test","LogonType":"3","Status":"0xc000006d","SubStatus":"0xc000006a","SourceIp":"203.0.113.45"},
+{"Timestamp":"2026-03-03T20:00:10+00:00","EventId":4625,"Computer":"LAB-PC01","Provider":"Microsoft-Windows-Security-Auditing","LogName":"Security","User":"bob.test","LogonType":"3","Status":"0xc000006d","SubStatus":"0xc000006a","SourceIp":"203.0.113.45"},
+{"Timestamp":"2026-03-03T20:00:15+00:00","EventId":4625,"Computer":"LAB-PC01","Provider":"Microsoft-Windows-Security-Auditing","LogName":"Security","User":"carol.test","LogonType":"3","Status":"0xc000006d","SubStatus":"0xc000006a","SourceIp":"203.0.113.45"},
+{"Timestamp":"2026-03-03T20:00:20+00:00","EventId":4625,"Computer":"LAB-PC01","Provider":"Microsoft-Windows-Security-Auditing","LogName":"Security","User":"ghost.test","LogonType":"3","Status":"0xc000006d","SubStatus":"0xc0000064","SourceIp":"203.0.113.45"},
+{"Timestamp":"2026-03-03T20:00:25+00:00","EventId":4625,"Computer":"LAB-PC01","Provider":"Microsoft-Windows-Security-Auditing","LogName":"Security","User":"alice.test","LogonType":"3","Status":"0xc000006d","SubStatus":"0xc000006a","SourceIp":"203.0.113.45"},
+{"Timestamp":"2026-03-03T20:00:30+00:00","EventId":4625,"Computer":"LAB-PC01","Provider":"Microsoft-Windows-Security-Auditing","LogName":"Security","User":"bob.test","LogonType":"3","Status":"0xc000006d","SubStatus":"0xc000006a","SourceIp":"203.0.113.45"},
+{"Timestamp":"2026-03-03T20:00:35+00:00","EventId":4625,"Computer":"LAB-PC01","Provider":"Microsoft-Windows-Security-Auditing","LogName":"Security","User":"carol.test","LogonType":"3","Status":"0xc000006d","SubStatus":"0xc000006a","SourceIp":"203.0.113.45"},
+{"Timestamp":"2026-03-03T20:00:40+00:00","EventId":4625,"Computer":"LAB-PC01","Provider":"Microsoft-Windows-Security-Auditing","LogName":"Security","User":"ghost.test","LogonType":"3","Status":"0xc000006d","SubStatus":"0xc0000064","SourceIp":"203.0.113.45"}
+]

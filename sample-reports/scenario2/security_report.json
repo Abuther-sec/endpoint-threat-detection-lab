@@ -1,0 +1,220 @@
+{
+  "report_title": "Endpoint Threat Detection Report",
+  "generated_at": "2026-11-11T21:48:59+00:00",
+  "source": {
+    "file_name": "scenario2_spray.json",
+    "data_origin": "synthetic"
+  },
+  "parsing": {
+    "total_records": 8,
+    "usable_events": 8,
+    "rejected": 0,
+    "duplicates_removed": 0,
+    "naive_timestamps_assumed_utc": 0,
+    "events_with_missing_core_fields": 0
+  },
+  "totals": {
+    "findings": 9,
+    "by_severity": {
+      "Informational": 8,
+      "Low": 0,
+      "Medium": 1,
+      "High": 0
+    },
+    "by_rule": {
+      "FAILED_LOGON": 8,
+      "REPEATED_FAILED_LOGONS": 0,
+      "MULTIPLE_USERS_FROM_SOURCE": 1,
+      "IMPORTANT_EVENT": 0,
+      "MALFORMED_RECORD": 0,
+      "INCOMPLETE_RECORD": 0
+    }
+  },
+  "findings": [
+    {
+      "rank": 1,
+      "severity": "Medium",
+      "confidence": "High",
+      "rule_id": "MULTIPLE_USERS_FROM_SOURCE",
+      "title": "Multiple users from one source",
+      "description": "4 different users failed to log on from source 203.0.113.45 within a 60 s window: alice.test, bob.test, carol.test, ghost.test",
+      "count": 8,
+      "record_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "first_seen": "2026-03-03T20:00:05+00:00",
+      "last_seen": "2026-03-03T20:00:40+00:00",
+      "user": null,
+      "source_ip": "203.0.113.45",
+      "reasons": [
+        "8 failed logons with different user names from one source",
+        "Some attempts used user names that do not exist (sub-status 0xC0000064), which suggests guessing"
+      ]
+    },
+    {
+      "rank": 2,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user alice.test from source 203.0.113.45 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        1
+      ],
+      "first_seen": "2026-03-03T20:00:05+00:00",
+      "last_seen": "2026-03-03T20:00:05+00:00",
+      "user": "alice.test",
+      "source_ip": "203.0.113.45",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 3,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user bob.test from source 203.0.113.45 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        2
+      ],
+      "first_seen": "2026-03-03T20:00:10+00:00",
+      "last_seen": "2026-03-03T20:00:10+00:00",
+      "user": "bob.test",
+      "source_ip": "203.0.113.45",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 4,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user carol.test from source 203.0.113.45 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        3
+      ],
+      "first_seen": "2026-03-03T20:00:15+00:00",
+      "last_seen": "2026-03-03T20:00:15+00:00",
+      "user": "carol.test",
+      "source_ip": "203.0.113.45",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 5,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user ghost.test from source 203.0.113.45 (logon type 3, status 0xc000006d, sub-status 0xc0000064)",
+      "count": 1,
+      "record_numbers": [
+        4
+      ],
+      "first_seen": "2026-03-03T20:00:20+00:00",
+      "last_seen": "2026-03-03T20:00:20+00:00",
+      "user": "ghost.test",
+      "source_ip": "203.0.113.45",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 6,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user alice.test from source 203.0.113.45 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        5
+      ],
+      "first_seen": "2026-03-03T20:00:25+00:00",
+      "last_seen": "2026-03-03T20:00:25+00:00",
+      "user": "alice.test",
+      "source_ip": "203.0.113.45",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 7,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user bob.test from source 203.0.113.45 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        6
+      ],
+      "first_seen": "2026-03-03T20:00:30+00:00",
+      "last_seen": "2026-03-03T20:00:30+00:00",
+      "user": "bob.test",
+      "source_ip": "203.0.113.45",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 8,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user carol.test from source 203.0.113.45 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        7
+      ],
+      "first_seen": "2026-03-03T20:00:35+00:00",
+      "last_seen": "2026-03-03T20:00:35+00:00",
+      "user": "carol.test",
+      "source_ip": "203.0.113.45",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 9,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user ghost.test from source 203.0.113.45 (logon type 3, status 0xc000006d, sub-status 0xc0000064)",
+      "count": 1,
+      "record_numbers": [
+        8
+      ],
+      "first_seen": "2026-03-03T20:00:40+00:00",
+      "last_seen": "2026-03-03T20:00:40+00:00",
+      "user": "ghost.test",
+      "source_ip": "203.0.113.45",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    }
+  ],
+  "limitations": [
+    "Findings are observations that need review, not proof of an attack.",
+    "Thresholds and severity rules are starting points chosen for this lab; their detection accuracy has not been measured.",
+    "Severity and confidence come from fixed rules and the evidence in the exported events only; missing context lowers confidence.",
+    "Timestamps keep the offset found in the data; timestamps without an offset are assumed to be UTC and counted in the parsing summary."
+  ]
+}
