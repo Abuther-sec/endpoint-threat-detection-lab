@@ -1,0 +1,6 @@
+[
+{"Timestamp":"2026-05-12T09:05:00+00:00","EventId":4740,"Computer":"LAB-PC01","Provider":"Microsoft-Windows-Security-Auditing","LogName":"Security","User":"alice.test"},
+{"Timestamp":"2026-05-12T09:10:00+00:00","EventId":4720,"Computer":"LAB-PC01","Provider":"Microsoft-Windows-Security-Auditing","LogName":"Security","User":"admin.test"},
+{"Timestamp":"2026-05-12T09:10:30+00:00","EventId":4732,"Computer":"LAB-PC01","Provider":"Microsoft-Windows-Security-Auditing","LogName":"Security","User":"admin.test"},
+{"Timestamp":"2026-05-12T09:12:00+00:00","EventId":1102,"Computer":"LAB-PC01","Provider":"Microsoft-Windows-Eventlog","LogName":"Security","User":"admin.test"}
+]

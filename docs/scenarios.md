@@ -126,3 +126,53 @@ Command:
 - Whether the account password was reset or the user was contacted.
 - For any burst of failures, search the whole log for successful logons by the same user
   and source, not only inside the 300 s window.
+
+## Scenario 4: account creation, group change and log clearing
+
+Input: sample-logs/scenarios/scenario4_privileged_changes.json (4 records).
+
+The file holds four events on one computer within seven minutes: a lockout (4740), then
+an account creation (4720), a group membership change (4732) and a security log clear
+(1102) performed by admin.test. The data has a single user field, so the name of the
+created account and the group are not in it.
+
+Command:
+
+    python src/analyze.py sample-logs/scenarios/scenario4_privileged_changes.json --origin synthetic --out sample-reports/scenario4
+
+### Facts (from the generated report)
+
+- 4 of 4 records usable, 0 rejected, 0 with missing core fields.
+- 4 findings, all IMPORTANT_EVENT, one per record: 1 High, 2 Medium, 1 Low (all confidence Medium).
+- High: event 1102, audit log cleared (record 4, 09:12:00). Reason printed: clearing the
+  audit log can hide activity, but administrators also do it.
+- Medium: event 4720, user account created (record 2, 09:10:00). Reason printed: a new
+  account can be a persistence step, but is also routine administration.
+- Medium: event 4732, member added to a local security group (record 3, 09:10:30). Reason
+  printed: group membership changes can grant privileges, but are also routine.
+- Low: event 4740, account locked out (alice.test, record 1, 09:05:00).
+- Each event is rated alone. No finding connects them.
+
+### Reading (interpretation, not proof)
+
+- In time order the events are account creation, group change, then log clearing, within
+  two minutes, by one account. An analyst may read that order as a possible cover-up
+  pattern, but the same sequence can also be a normal administrator task.
+- Not determined: which account was created, which group received it, whether the
+  changes were approved, and whether admin.test is a legitimate administrator.
+- Events before the log clear may no longer exist on the machine, so the clear limits
+  what the rest of this log can show.
+
+### Limits of this detection
+
+- The tool rates events one by one. A rule that links related events in sequence is not
+  implemented; it is possible future work.
+- The format has one user field, so the actor and the target of an event are not
+  separated.
+
+### What an analyst would check next
+
+- The created account and the group in the original events, and who requested them.
+- Logon events for admin.test before 09:10:00, and the source of those logons.
+- A copy of the log held elsewhere (forwarded events or a backup), since the local log was cleared.
+- Whether a change ticket or approval exists for these actions.

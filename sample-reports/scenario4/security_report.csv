@@ -1,0 +1,5 @@
+rank,severity,confidence,rule_id,count,first_seen,last_seen,user,source_ip,record_numbers,description,reasons
+1,High,Medium,IMPORTANT_EVENT,1,2026-05-12T09:12:00+00:00,2026-05-12T09:12:00+00:00,admin.test,,4,"Event 1102: Audit log was cleared (user admin.test, computer LAB-PC01)","Clearing the audit log can hide activity, but administrators also do it"
+2,Medium,Medium,IMPORTANT_EVENT,1,2026-05-12T09:10:00+00:00,2026-05-12T09:10:00+00:00,admin.test,,2,"Event 4720: User account was created (user admin.test, computer LAB-PC01)","A new account can be a persistence step, but is also routine administration"
+3,Medium,Medium,IMPORTANT_EVENT,1,2026-05-12T09:10:30+00:00,2026-05-12T09:10:30+00:00,admin.test,,3,"Event 4732: Member was added to a local security group (user admin.test, computer LAB-PC01)","Group membership changes can grant privileges, but are also routine"
+4,Low,Medium,IMPORTANT_EVENT,1,2026-05-12T09:05:00+00:00,2026-05-12T09:05:00+00:00,alice.test,,1,"Event 4740: User account was locked out (user alice.test, computer LAB-PC01)",Lockouts often follow ordinary mistyped passwords
