@@ -1,66 +1,128 @@
 # Endpoint Threat Detection & Network Analysis Lab
 
-A lightweight cybersecurity home lab for Windows event analysis, network traffic investigation, and Python-based security automation.
+A lightweight, defensive home lab for Windows event log analysis and network traffic
+investigation, built with Python (standard library only) and Wireshark.
 
-> Status: Work in progress. This README is filled in step by step as each part of the project is built and verified. Nothing here claims a result that has not been tested.
+> Status: work in progress. Everything stated here comes from commands that were run;
+> what was not measured is listed under Limitations.
 
-## Project Overview
+## What it does
 
-A defensive, local-only lab designed to run on low-specification hardware. It focuses on analyzing exported Windows security logs with Python, applying configurable detection rules, and investigating network traffic in training PCAP files with Wireshark.
+- Reads exported Windows security events (JSON) and normalizes them.
+- Applies configurable detection rules and rates each finding by severity and confidence,
+  with the reasons printed.
+- Writes reports as JSON, CSV and Markdown.
+- Documents five SOC scenarios on synthetic data and the analysis of two public PCAP files.
 
-## Objectives
+It runs on a low-specification Windows 10 PC. All published data is synthetic or public.
 
-- Understand Windows Event Logs (Security, System, Application).
-- Parse CSV/JSON log exports with a Python tool.
-- Apply configurable, testable detection rules.
-- Classify alerts by severity and confidence.
-- Generate investigation reports.
-- Analyze training PCAP files with Wireshark.
+## Quick start (Windows PowerShell)
 
-## Planned Architecture
+    git clone <repository-url>
+    cd endpoint-threat-detection-lab
+    python -m venv .venv
+    .venv\Scripts\Activate.ps1
+    python src\analyze.py sample-logs\scenarios\scenario1_bruteforce.json --origin synthetic --out sample-reports\scenario1
 
-Windows Security Logs -> Export (CSV/JSON) -> Log Parser -> Detection Engine -> Alerts -> Report
+The report files are written to the folder given by --out: security_report.json,
+security_report.csv and security_report.md.
 
-PCAP training files -> Wireshark analysis -> Findings -> Network investigation report
+## Command-line options
 
-## Hardware and Software Requirements
+| Option | Meaning | Default |
+|---|---|---|
+| input | JSON file of events | required |
+| --origin | synthetic or real | required |
+| --out | output folder | output |
+| --window | seconds for the repeated-failure window | 60 |
+| --repeat-threshold | failures needed for REPEATED_FAILED_LOGONS | 5 |
+| --multi-user-threshold | users needed for MULTIPLE_USERS_FROM_SOURCE | 3 |
+| --success-window | seconds to look for a success after a burst | 300 |
 
-To be completed after the environment is finalized.
+With --origin real the tool only writes into output/, which is git-ignored.
 
-## Installation
+## Detection rules (defaults)
 
-To be completed.
+| Rule | What it flags |
+|---|---|
+| FAILED_LOGON | Each failed logon (event 4625) |
+| REPEATED_FAILED_LOGONS | 5 or more failures for one user and source within 60 s |
+| MULTIPLE_USERS_FROM_SOURCE | 3 or more different users failing from one known source within 60 s |
+| IMPORTANT_EVENT | Events 1102, 4720, 4732, 4740, 7045 (configurable) |
+| MALFORMED_RECORD | A record that was rejected (for example an invalid timestamp) |
+| INCOMPLETE_RECORD | A usable record that lacks a core field (for example the user) |
 
-## Usage
+Each finding gets a severity (Informational, Low, Medium, High) and a confidence (Low,
+Medium, High) with printed reasons. For example, a success for the same user within 300 s
+after a burst of failures raises the rating. Details: docs/detection-rules.md.
 
-To be completed.
+## Results (from runs of this repository)
 
-## Detection Rules
+| Scenario | Input records | Findings |
+|---|---|---|
+| 1. Repeated failures, one account | 9 | 10: 1 Medium, 9 Informational |
+| 2. One source, several accounts | 8 | 9: 1 Medium, 8 Informational |
+| 3. Success after repeated failures | 14 | 14: 1 High, 1 Medium, 12 Informational |
+| 4. Account creation, group change, log clear | 4 | 4: 1 High, 2 Medium, 1 Low |
+| 5. Dirty input | 6 | 6 Informational; 2 rejected, 1 duplicate removed |
 
-To be completed.
+Details, readings and what is not determined: docs/scenarios.md.
+
+Tests: 73 unit tests, all passing at the last run; coverage 99% (463 statements, 2 not
+covered, both known and left on purpose).
 
 ## Testing
 
-To be completed. Test results will only be added after the tests are actually run.
+    pip install -r requirements-dev.txt
+    python -m unittest discover -s tests
+    coverage run -m unittest discover -s tests
+    coverage report
 
-## Results
+## Project structure
 
-No results yet.
+    src/            log_parser, detection_engine, severity, report_generator, analyze
+    tests/          unit tests for each module
+    sample-logs/    synthetic input, including five scenario files
+    sample-reports/ reports generated from the synthetic input
+    docs/           scenarios, PCAP analysis, investigation method, ATT&CK mapping
 
-## Security Considerations
+## Documentation
 
-- Only synthetic or anonymized data is published.
+- docs/scenarios.md: five SOC scenarios, facts and interpretation kept apart
+- docs/pcap-analysis.md: two public PCAP samples read with tshark
+- docs/investigation-methodology.md: how to go from a finding to a conclusion
+- docs/mitre-attack-mapping.md: candidate ATT&CK techniques, one still unverified
+- docs/detection-rules.md: rules, thresholds and rating logic
+
+## Security and privacy
+
+- Only synthetic data and public sample captures are published.
 - Real logs, PCAP files, credentials and keys are excluded through .gitignore.
+- Reports name the input file only, not its full path, and CSV cells that could be read
+  as formulas are neutralized.
 - All testing is local and authorized.
 
 ## Limitations
 
-To be completed.
+- The rules are fixed and simple; their detection accuracy has not been measured.
+- Events are rated one by one; there is no rule that links events in sequence.
+- A success after failures is looked for only within 300 s.
+- The input format has a single user field, so actor and target are not separated.
+- Findings are observations that need review, not proof of an attack.
+- Two small public PCAP files were analyzed by hand; the PCAP work is not part of the tool.
 
-## Future Improvements
+## Future work
 
-To be completed.
+- A rule that links related events in sequence (for example account creation, group
+  change, log clearing).
+- Lower confidence for findings built on incomplete records.
+- A Wazuh-based lab after a memory upgrade; Kali for further network exercises.
+- Verify the remaining ATT&CK technique (T1070.001) against the official page.
 
-## Skills Learned
+## What this project practices
 
-To be completed.
+- Reading Windows security events and writing detection logic in Python
+- Testing and measuring code coverage
+- Writing reports that separate facts from interpretation
+- Reading network captures with Wireshark and tshark
+- Mapping findings to MITRE ATT&CK as hypotheses, with sources
