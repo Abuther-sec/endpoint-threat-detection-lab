@@ -176,3 +176,50 @@ Command:
 - Logon events for admin.test before 09:10:00, and the source of those logons.
 - A copy of the log held elsewhere (forwarded events or a backup), since the local log was cleared.
 - Whether a change ticket or approval exists for these actions.
+
+## Scenario 5: dirty input (duplicates, bad and missing fields)
+
+Input: sample-logs/scenarios/scenario5_data_quality.json (6 records).
+
+The file mixes one valid record with five problems: an exact duplicate (record 2), a
+timestamp without an offset (record 3), an invalid timestamp (record 4), a missing
+EventId (record 5), and a failed logon with no user and no source address (record 6).
+
+Command:
+
+    python src/analyze.py sample-logs/scenarios/scenario5_data_quality.json --origin synthetic --out sample-reports/scenario5
+
+### Facts (from the generated report)
+
+- Data quality: 6 records, 3 usable events, 2 rejected, 1 duplicate removed, 1 naive
+  timestamp assumed UTC, 1 event with missing core fields.
+- Record 4 was rejected: invalid timestamp not-a-date. Record 5 was rejected: missing
+  event id. Both appear as MALFORMED_RECORD findings (Informational).
+- Record 6 appears as an INCOMPLETE_RECORD finding: the tool reports it as missing user.
+- 6 findings, all Informational: 3 FAILED_LOGON (records 1, 3 and 6), 2 MALFORMED_RECORD,
+  1 INCOMPLETE_RECORD.
+- Record 6 also produced a FAILED_LOGON finding with user unknown and source
+  unknown, with confidence High.
+- The duplicate (record 2) is counted in the summary only; it has no finding of its own.
+- Record numbers refer to the position in the input file, so record 2 is absent from the findings.
+
+### Reading (interpretation, not proof)
+
+- Problem records are counted and shown, not dropped silently: 2 rejected, 1 incomplete,
+  1 duplicate removed.
+- The High confidence on the FAILED_LOGON of record 6 reflects the event type only; it
+  does not take the missing user and source into account. Data quality has to be read
+  together with individual findings.
+- The timestamp of record 3 was assumed to be UTC. If its real zone differs, its position
+  relative to other events could change.
+
+### Limits and possible improvements
+
+- Duplicate removal covers exact copies only; near-duplicates are not detected.
+- Lowering the confidence of findings built on incomplete records is a possible future change.
+
+### What an analyst would check next
+
+- Where the rejected and incomplete records came from (export tool, collector, field mapping).
+- Whether the source system can export again with the missing fields.
+- The time zone of the system that produced the record without an offset.

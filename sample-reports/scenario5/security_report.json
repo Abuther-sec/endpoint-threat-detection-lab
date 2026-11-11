@@ -1,0 +1,155 @@
+{
+  "report_title": "Endpoint Threat Detection Report",
+  "generated_at": "2026-11-11T22:17:25+00:00",
+  "source": {
+    "file_name": "scenario5_data_quality.json",
+    "data_origin": "synthetic"
+  },
+  "parsing": {
+    "total_records": 6,
+    "usable_events": 3,
+    "rejected": 2,
+    "duplicates_removed": 1,
+    "naive_timestamps_assumed_utc": 1,
+    "events_with_missing_core_fields": 1
+  },
+  "totals": {
+    "findings": 6,
+    "by_severity": {
+      "Informational": 6,
+      "Low": 0,
+      "Medium": 0,
+      "High": 0
+    },
+    "by_rule": {
+      "FAILED_LOGON": 3,
+      "REPEATED_FAILED_LOGONS": 0,
+      "MULTIPLE_USERS_FROM_SOURCE": 0,
+      "IMPORTANT_EVENT": 0,
+      "MALFORMED_RECORD": 2,
+      "INCOMPLETE_RECORD": 1
+    }
+  },
+  "findings": [
+    {
+      "rank": 1,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user alice.test from source 192.0.2.10 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        1
+      ],
+      "first_seen": "2026-06-01T08:00:00+00:00",
+      "last_seen": "2026-06-01T08:00:00+00:00",
+      "user": "alice.test",
+      "source_ip": "192.0.2.10",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 2,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user bob.test from source 192.0.2.11 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        3
+      ],
+      "first_seen": "2026-06-01T08:00:10+00:00",
+      "last_seen": "2026-06-01T08:00:10+00:00",
+      "user": "bob.test",
+      "source_ip": "192.0.2.11",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 3,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user unknown from source unknown (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        6
+      ],
+      "first_seen": "2026-06-01T08:00:30+00:00",
+      "last_seen": "2026-06-01T08:00:30+00:00",
+      "user": null,
+      "source_ip": null,
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 4,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "MALFORMED_RECORD",
+      "title": "Malformed record rejected",
+      "description": "Record 4 was rejected: invalid timestamp: not-a-date",
+      "count": 1,
+      "record_numbers": [
+        4
+      ],
+      "first_seen": null,
+      "last_seen": null,
+      "user": null,
+      "source_ip": null,
+      "reasons": [
+        "Data-quality issue: the record could not be used, so detection did not see it"
+      ]
+    },
+    {
+      "rank": 5,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "MALFORMED_RECORD",
+      "title": "Malformed record rejected",
+      "description": "Record 5 was rejected: missing event_id",
+      "count": 1,
+      "record_numbers": [
+        5
+      ],
+      "first_seen": null,
+      "last_seen": null,
+      "user": null,
+      "source_ip": null,
+      "reasons": [
+        "Data-quality issue: the record could not be used, so detection did not see it"
+      ]
+    },
+    {
+      "rank": 6,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "INCOMPLETE_RECORD",
+      "title": "Incomplete record",
+      "description": "Record 6 is missing: user",
+      "count": 1,
+      "record_numbers": [
+        6
+      ],
+      "first_seen": "2026-06-01T08:00:30+00:00",
+      "last_seen": "2026-06-01T08:00:30+00:00",
+      "user": null,
+      "source_ip": null,
+      "reasons": [
+        "Data-quality issue: the record is missing expected fields, so rules may be less reliable"
+      ]
+    }
+  ],
+  "limitations": [
+    "Findings are observations that need review, not proof of an attack.",
+    "Thresholds and severity rules are starting points chosen for this lab; their detection accuracy has not been measured.",
+    "Severity and confidence come from fixed rules and the evidence in the exported events only; missing context lowers confidence.",
+    "Timestamps keep the offset found in the data; timestamps without an offset are assumed to be UTC and counted in the parsing summary."
+  ]
+}
