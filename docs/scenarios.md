@@ -83,3 +83,46 @@ Command:
 - Lockout events (4740) for the three existing accounts.
 - Other names tried by the same source before 20:00:05 or after 20:00:40.
 - Whether the source is expected (scanner, test host).
+
+## Scenario 3: successful logon after repeated failures
+
+Input: sample-logs/scenarios/scenario3_success_after_failures.json (14 records).
+
+The file holds two cases built the same way: six failed logons 5 seconds apart, then a
+successful logon (4624) from the same source for the same user. Only the delay differs:
+95 s after the last failure for dave.test (record 7) and 575 s for erin.test (record 14).
+
+Command:
+
+    python src/analyze.py sample-logs/scenarios/scenario3_success_after_failures.json --origin synthetic --out sample-reports/scenario3
+
+### Facts (from the generated report)
+
+- 14 of 14 records usable, 0 rejected, 0 with missing core fields (the 4624 records have
+  no Status or SubStatus and were still accepted).
+- 14 findings: 1 High (confidence Medium), 1 Medium (confidence Medium), 12 Informational.
+- High: REPEATED_FAILED_LOGONS for dave.test from 198.51.100.77, records 1 to 6,
+  6 failures within 25 s. Reasons printed: 6 failures for one user and source, and a
+  successful logon for the same user followed (record 7).
+- Medium: REPEATED_FAILED_LOGONS for erin.test from 198.51.100.88, records 8 to 13,
+  6 failures within 25 s. Reasons printed: 6 failures, and no successful logon for this
+  user followed within the window.
+- The two successful logons (records 7 and 14) produce no finding of their own.
+
+### Reading (interpretation, not proof)
+
+- The two cases differ only in the delay of the success, and their ratings differ. The
+  tool words the success as a possible mistyped password finally corrected, or a guessed
+  one; the log alone cannot tell which.
+- The finding for erin.test says no success followed within the window, but record 14
+  shows one 575 s later. The 300 s look-ahead is a lab choice, so a later success is not
+  mentioned in that finding. An analyst reading only the finding would miss it.
+- Not determined: whether either success came from the person who owns the account.
+
+### What an analyst would check next
+
+- What the account did after the successful logon (new sessions, privilege use, other hosts).
+- Whether the source address is known for that user.
+- Whether the account password was reset or the user was contacted.
+- For any burst of failures, search the whole log for successful logons by the same user
+  and source, not only inside the 300 s window.

@@ -1,0 +1,319 @@
+{
+  "report_title": "Endpoint Threat Detection Report",
+  "generated_at": "2026-11-11T21:57:52+00:00",
+  "source": {
+    "file_name": "scenario3_success_after_failures.json",
+    "data_origin": "synthetic"
+  },
+  "parsing": {
+    "total_records": 14,
+    "usable_events": 14,
+    "rejected": 0,
+    "duplicates_removed": 0,
+    "naive_timestamps_assumed_utc": 0,
+    "events_with_missing_core_fields": 0
+  },
+  "totals": {
+    "findings": 14,
+    "by_severity": {
+      "Informational": 12,
+      "Low": 0,
+      "Medium": 1,
+      "High": 1
+    },
+    "by_rule": {
+      "FAILED_LOGON": 12,
+      "REPEATED_FAILED_LOGONS": 2,
+      "MULTIPLE_USERS_FROM_SOURCE": 0,
+      "IMPORTANT_EVENT": 0,
+      "MALFORMED_RECORD": 0,
+      "INCOMPLETE_RECORD": 0
+    }
+  },
+  "findings": [
+    {
+      "rank": 1,
+      "severity": "High",
+      "confidence": "Medium",
+      "rule_id": "REPEATED_FAILED_LOGONS",
+      "title": "Repeated failed logons",
+      "description": "6 failed logons for user dave.test from source 198.51.100.77 within 25 seconds (threshold 5 in 60 s)",
+      "count": 6,
+      "record_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "first_seen": "2026-04-07T10:00:00+00:00",
+      "last_seen": "2026-04-07T10:00:25+00:00",
+      "user": "dave.test",
+      "source_ip": "198.51.100.77",
+      "reasons": [
+        "6 failed logons for one user and source within the detection window",
+        "A successful logon for the same user followed (record 7); this may be a mistyped password finally corrected, or a guessed one"
+      ]
+    },
+    {
+      "rank": 2,
+      "severity": "Medium",
+      "confidence": "Medium",
+      "rule_id": "REPEATED_FAILED_LOGONS",
+      "title": "Repeated failed logons",
+      "description": "6 failed logons for user erin.test from source 198.51.100.88 within 25 seconds (threshold 5 in 60 s)",
+      "count": 6,
+      "record_numbers": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "first_seen": "2026-04-07T11:00:00+00:00",
+      "last_seen": "2026-04-07T11:00:25+00:00",
+      "user": "erin.test",
+      "source_ip": "198.51.100.88",
+      "reasons": [
+        "6 failed logons for one user and source within the detection window",
+        "No successful logon for this user followed within the window"
+      ]
+    },
+    {
+      "rank": 3,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user dave.test from source 198.51.100.77 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        1
+      ],
+      "first_seen": "2026-04-07T10:00:00+00:00",
+      "last_seen": "2026-04-07T10:00:00+00:00",
+      "user": "dave.test",
+      "source_ip": "198.51.100.77",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 4,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user dave.test from source 198.51.100.77 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        2
+      ],
+      "first_seen": "2026-04-07T10:00:05+00:00",
+      "last_seen": "2026-04-07T10:00:05+00:00",
+      "user": "dave.test",
+      "source_ip": "198.51.100.77",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 5,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user dave.test from source 198.51.100.77 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        3
+      ],
+      "first_seen": "2026-04-07T10:00:10+00:00",
+      "last_seen": "2026-04-07T10:00:10+00:00",
+      "user": "dave.test",
+      "source_ip": "198.51.100.77",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 6,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user dave.test from source 198.51.100.77 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        4
+      ],
+      "first_seen": "2026-04-07T10:00:15+00:00",
+      "last_seen": "2026-04-07T10:00:15+00:00",
+      "user": "dave.test",
+      "source_ip": "198.51.100.77",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 7,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user dave.test from source 198.51.100.77 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        5
+      ],
+      "first_seen": "2026-04-07T10:00:20+00:00",
+      "last_seen": "2026-04-07T10:00:20+00:00",
+      "user": "dave.test",
+      "source_ip": "198.51.100.77",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 8,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user dave.test from source 198.51.100.77 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        6
+      ],
+      "first_seen": "2026-04-07T10:00:25+00:00",
+      "last_seen": "2026-04-07T10:00:25+00:00",
+      "user": "dave.test",
+      "source_ip": "198.51.100.77",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 9,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user erin.test from source 198.51.100.88 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        8
+      ],
+      "first_seen": "2026-04-07T11:00:00+00:00",
+      "last_seen": "2026-04-07T11:00:00+00:00",
+      "user": "erin.test",
+      "source_ip": "198.51.100.88",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 10,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user erin.test from source 198.51.100.88 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        9
+      ],
+      "first_seen": "2026-04-07T11:00:05+00:00",
+      "last_seen": "2026-04-07T11:00:05+00:00",
+      "user": "erin.test",
+      "source_ip": "198.51.100.88",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 11,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user erin.test from source 198.51.100.88 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        10
+      ],
+      "first_seen": "2026-04-07T11:00:10+00:00",
+      "last_seen": "2026-04-07T11:00:10+00:00",
+      "user": "erin.test",
+      "source_ip": "198.51.100.88",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 12,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user erin.test from source 198.51.100.88 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        11
+      ],
+      "first_seen": "2026-04-07T11:00:15+00:00",
+      "last_seen": "2026-04-07T11:00:15+00:00",
+      "user": "erin.test",
+      "source_ip": "198.51.100.88",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 13,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user erin.test from source 198.51.100.88 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        12
+      ],
+      "first_seen": "2026-04-07T11:00:20+00:00",
+      "last_seen": "2026-04-07T11:00:20+00:00",
+      "user": "erin.test",
+      "source_ip": "198.51.100.88",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 14,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user erin.test from source 198.51.100.88 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        13
+      ],
+      "first_seen": "2026-04-07T11:00:25+00:00",
+      "last_seen": "2026-04-07T11:00:25+00:00",
+      "user": "erin.test",
+      "source_ip": "198.51.100.88",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    }
+  ],
+  "limitations": [
+    "Findings are observations that need review, not proof of an attack.",
+    "Thresholds and severity rules are starting points chosen for this lab; their detection accuracy has not been measured.",
+    "Severity and confidence come from fixed rules and the evidence in the exported events only; missing context lowers confidence.",
+    "Timestamps keep the offset found in the data; timestamps without an offset are assumed to be UTC and counted in the parsing summary."
+  ]
+}
