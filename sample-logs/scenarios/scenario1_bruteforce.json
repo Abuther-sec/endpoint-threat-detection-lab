@@ -1,0 +1,11 @@
+[
+{"Timestamp":"2026-02-10T13:30:00+00:00","EventId":4625,"Computer":"LAB-PC01","Provider":"Microsoft-Windows-Security-Auditing","LogName":"Security","User":"alice.test","LogonType":"3","Status":"0xc000006d","SubStatus":"0xc000006a","SourceIp":"192.0.2.10"},
+{"Timestamp":"2026-02-10T14:00:05+00:00","EventId":4625,"Computer":"LAB-PC01","Provider":"Microsoft-Windows-Security-Auditing","LogName":"Security","User":"bob.test","LogonType":"3","Status":"0xc000006d","SubStatus":"0xc000006a","SourceIp":"198.51.100.23"},
+{"Timestamp":"2026-02-10T14:00:10+00:00","EventId":4625,"Computer":"LAB-PC01","Provider":"Microsoft-Windows-Security-Auditing","LogName":"Security","User":"bob.test","LogonType":"3","Status":"0xc000006d","SubStatus":"0xc000006a","SourceIp":"198.51.100.23"},
+{"Timestamp":"2026-02-10T14:00:15+00:00","EventId":4625,"Computer":"LAB-PC01","Provider":"Microsoft-Windows-Security-Auditing","LogName":"Security","User":"bob.test","LogonType":"3","Status":"0xc000006d","SubStatus":"0xc000006a","SourceIp":"198.51.100.23"},
+{"Timestamp":"2026-02-10T14:00:20+00:00","EventId":4625,"Computer":"LAB-PC01","Provider":"Microsoft-Windows-Security-Auditing","LogName":"Security","User":"bob.test","LogonType":"3","Status":"0xc000006d","SubStatus":"0xc000006a","SourceIp":"198.51.100.23"},
+{"Timestamp":"2026-02-10T14:00:25+00:00","EventId":4625,"Computer":"LAB-PC01","Provider":"Microsoft-Windows-Security-Auditing","LogName":"Security","User":"bob.test","LogonType":"3","Status":"0xc000006d","SubStatus":"0xc000006a","SourceIp":"198.51.100.23"},
+{"Timestamp":"2026-02-10T14:00:30+00:00","EventId":4625,"Computer":"LAB-PC01","Provider":"Microsoft-Windows-Security-Auditing","LogName":"Security","User":"bob.test","LogonType":"3","Status":"0xc000006d","SubStatus":"0xc000006a","SourceIp":"198.51.100.23"},
+{"Timestamp":"2026-02-10T14:00:35+00:00","EventId":4625,"Computer":"LAB-PC01","Provider":"Microsoft-Windows-Security-Auditing","LogName":"Security","User":"bob.test","LogonType":"3","Status":"0xc000006d","SubStatus":"0xc000006a","SourceIp":"198.51.100.23"},
+{"Timestamp":"2026-02-10T14:00:40+00:00","EventId":4625,"Computer":"LAB-PC01","Provider":"Microsoft-Windows-Security-Auditing","LogName":"Security","User":"bob.test","LogonType":"3","Status":"0xc000006d","SubStatus":"0xc000006a","SourceIp":"198.51.100.23"}
+]

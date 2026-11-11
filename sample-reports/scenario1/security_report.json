@@ -1,0 +1,239 @@
+{
+  "report_title": "Endpoint Threat Detection Report",
+  "generated_at": "2026-11-11T21:34:14+00:00",
+  "source": {
+    "file_name": "scenario1_bruteforce.json",
+    "data_origin": "synthetic"
+  },
+  "parsing": {
+    "total_records": 9,
+    "usable_events": 9,
+    "rejected": 0,
+    "duplicates_removed": 0,
+    "naive_timestamps_assumed_utc": 0,
+    "events_with_missing_core_fields": 0
+  },
+  "totals": {
+    "findings": 10,
+    "by_severity": {
+      "Informational": 9,
+      "Low": 0,
+      "Medium": 1,
+      "High": 0
+    },
+    "by_rule": {
+      "FAILED_LOGON": 9,
+      "REPEATED_FAILED_LOGONS": 1,
+      "MULTIPLE_USERS_FROM_SOURCE": 0,
+      "IMPORTANT_EVENT": 0,
+      "MALFORMED_RECORD": 0,
+      "INCOMPLETE_RECORD": 0
+    }
+  },
+  "findings": [
+    {
+      "rank": 1,
+      "severity": "Medium",
+      "confidence": "Medium",
+      "rule_id": "REPEATED_FAILED_LOGONS",
+      "title": "Repeated failed logons",
+      "description": "8 failed logons for user bob.test from source 198.51.100.23 within 35 seconds (threshold 5 in 60 s)",
+      "count": 8,
+      "record_numbers": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "first_seen": "2026-02-10T14:00:05+00:00",
+      "last_seen": "2026-02-10T14:00:40+00:00",
+      "user": "bob.test",
+      "source_ip": "198.51.100.23",
+      "reasons": [
+        "8 failed logons for one user and source within the detection window",
+        "No successful logon for this user followed within the window"
+      ]
+    },
+    {
+      "rank": 2,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user alice.test from source 192.0.2.10 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        1
+      ],
+      "first_seen": "2026-02-10T13:30:00+00:00",
+      "last_seen": "2026-02-10T13:30:00+00:00",
+      "user": "alice.test",
+      "source_ip": "192.0.2.10",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 3,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user bob.test from source 198.51.100.23 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        2
+      ],
+      "first_seen": "2026-02-10T14:00:05+00:00",
+      "last_seen": "2026-02-10T14:00:05+00:00",
+      "user": "bob.test",
+      "source_ip": "198.51.100.23",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 4,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user bob.test from source 198.51.100.23 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        3
+      ],
+      "first_seen": "2026-02-10T14:00:10+00:00",
+      "last_seen": "2026-02-10T14:00:10+00:00",
+      "user": "bob.test",
+      "source_ip": "198.51.100.23",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 5,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user bob.test from source 198.51.100.23 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        4
+      ],
+      "first_seen": "2026-02-10T14:00:15+00:00",
+      "last_seen": "2026-02-10T14:00:15+00:00",
+      "user": "bob.test",
+      "source_ip": "198.51.100.23",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 6,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user bob.test from source 198.51.100.23 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        5
+      ],
+      "first_seen": "2026-02-10T14:00:20+00:00",
+      "last_seen": "2026-02-10T14:00:20+00:00",
+      "user": "bob.test",
+      "source_ip": "198.51.100.23",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 7,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user bob.test from source 198.51.100.23 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        6
+      ],
+      "first_seen": "2026-02-10T14:00:25+00:00",
+      "last_seen": "2026-02-10T14:00:25+00:00",
+      "user": "bob.test",
+      "source_ip": "198.51.100.23",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 8,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user bob.test from source 198.51.100.23 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        7
+      ],
+      "first_seen": "2026-02-10T14:00:30+00:00",
+      "last_seen": "2026-02-10T14:00:30+00:00",
+      "user": "bob.test",
+      "source_ip": "198.51.100.23",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 9,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user bob.test from source 198.51.100.23 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        8
+      ],
+      "first_seen": "2026-02-10T14:00:35+00:00",
+      "last_seen": "2026-02-10T14:00:35+00:00",
+      "user": "bob.test",
+      "source_ip": "198.51.100.23",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    },
+    {
+      "rank": 10,
+      "severity": "Informational",
+      "confidence": "High",
+      "rule_id": "FAILED_LOGON",
+      "title": "Failed logon (event 4625)",
+      "description": "Failed logon for user bob.test from source 198.51.100.23 (logon type 3, status 0xc000006d, sub-status 0xc000006a)",
+      "count": 1,
+      "record_numbers": [
+        9
+      ],
+      "first_seen": "2026-02-10T14:00:40+00:00",
+      "last_seen": "2026-02-10T14:00:40+00:00",
+      "user": "bob.test",
+      "source_ip": "198.51.100.23",
+      "reasons": [
+        "A single failed logon is common (a mistyped password); it matters only as part of a pattern"
+      ]
+    }
+  ],
+  "limitations": [
+    "Findings are observations that need review, not proof of an attack.",
+    "Thresholds and severity rules are starting points chosen for this lab; their detection accuracy has not been measured.",
+    "Severity and confidence come from fixed rules and the evidence in the exported events only; missing context lowers confidence.",
+    "Timestamps keep the offset found in the data; timestamps without an offset are assumed to be UTC and counted in the parsing summary."
+  ]
+}
