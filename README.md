@@ -126,3 +126,7 @@ covered, both known and left on purpose).
 - Writing reports that separate facts from interpretation
 - Reading network captures with Wireshark and tshark
 - Mapping findings to MITRE ATT&CK as hypotheses, with sources
+
+## License
+
+MIT License. See the LICENSE file.
